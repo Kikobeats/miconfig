@@ -2,14 +2,15 @@
 
 'use strict'
 
+const merge = require('merge-options')
 const dlv = require('dlv')
 
 const { NODE_ENV } =
   typeof process === 'object'
     ? process.env
     : typeof Deno !== 'undefined'
-      ? Deno.env()
-      : {}
+    ? Deno.env()
+    : {}
 
 const RESERVED_KEYS = ['get', 'has', 'require', 'required']
 
@@ -20,7 +21,7 @@ const throwRequireKeyError = key => {
 }
 
 module.exports = ({ default: base, ...envs }) => {
-  const config = { ...base, ...envs[NODE_ENV] }
+  const config = merge(base, envs[NODE_ENV])
 
   const reservedWords = Object.keys(config).filter(key =>
     RESERVED_KEYS.includes(key)
