@@ -48,12 +48,20 @@ Just call **miconfig** passing these configuratios:
 ```js
 const loadConfig = require('miconfig')
 
-const config = loadConfig({
-  default: require('./config/default'),
-  production: require('./config/production'),
-  staging: require('./config/staging'),
-  test: require('./config/test')
-})
+const FILES = [
+  'default', 
+  NODE_ENV === 'development' ? undefined : NODE_ENV
+].filter(Boolean)
+
+const environment = FILES.reduce(
+  (acc, key) => ({
+    ...acc,
+    [key]: require(`./config/${key}`)
+  }),
+  {}
+)
+
+const config = loadConfig(environment)
 ```
 
 In case you want to use a different file format (like YAML), you've to parser them before be loaded:
@@ -65,12 +73,20 @@ const fs = require('fs')
 
 const fromYaml = filepath => yaml.safeLoad(fs.readFileSync(filepath, 'utf8'))
 
-const config = loadConfig({
-  default: fromYaml('./config/default.yml'),
-  production: fromYaml('./config/production.yml'),
-  staging: fromYaml('./config/staging.yml'),
-  test: fromYaml('./config/test.yml')
-})
+const FILES = [
+  'default', 
+  NODE_ENV === 'development' ? undefined : NODE_ENV
+].filter(Boolean)
+
+const environment = FILES.reduce(
+  (acc, key) => ({
+    ...acc,
+    [key]: fromYaml(`./config/${key}.yml`)
+  }),
+  {}
+)
+
+const config = loadConfig(environment)
 ```
 
 The configuration `default` will always be  loaded, being possible overwrite these defaults values by the current `NODE_ENV` configuration.
