@@ -43,7 +43,7 @@ You can load them for anywhere, e.g., from a folder called `config`:
    └── test.js
 ```
 
-Just call **miconfig** for creating them:
+Just call **miconfig** passing these configuratios:
 
 ```js
 const loadConfig = require('miconfig')
@@ -53,6 +53,23 @@ const config = loadConfig({
   production: require('./config/production'),
   staging: require('./config/staging'),
   test: require('./config/test')
+})
+```
+
+In case you want to use a different file format (like YAML), you've to parser them before be loaded:
+
+```js
+const loadConfig = require('miconfig')
+const yaml = require('js-yaml')
+const fs = require('fs')
+
+const fromYaml = filepath => yaml.safeLoad(fs.readFileSync(filepath, 'utf8'))
+
+const config = loadConfig({
+  default: fromYaml('./config/default'),
+  production: fromYaml('./config/production'),
+  staging: fromYaml('./config/staging'),
+  test: fromYaml('./config/test')
 })
 ```
 
