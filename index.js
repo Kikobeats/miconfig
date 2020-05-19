@@ -5,23 +5,24 @@
 const merge = require('merge-options')
 const dlv = require('dlv')
 
-const { NODE_ENV } =
-  typeof process === 'object'
+const getSource = () =>
+  (typeof process === 'object'
     ? process.env
     : typeof Deno !== 'undefined'
       ? Deno.env()
       : {}
+  ).NODE_ENV
 
 const RESERVED_KEYS = ['get', 'has', 'require', 'required']
 
-const throwRequireKeyError = key => {
+const throwRequireKeyError = (key, env) => {
   throw new TypeError(
-    `Required key \`${key}\` not found at \`${NODE_ENV}\` environment.`
+    `Required key \`${key}\` not found at \`${env}\` environment.`
   )
 }
 
-module.exports = ({ default: base, ...envs }) => {
-  const config = merge(base, envs[NODE_ENV])
+module.exports = ({ default: base, ...envs }, env = getSource()) => {
+  const config = merge(base, envs[env])
 
   const reservedWords = Object.keys(config).filter(key =>
     RESERVED_KEYS.includes(key)
@@ -48,7 +49,7 @@ module.exports = ({ default: base, ...envs }) => {
   Object.defineProperty(config, 'require', {
     enumerable: false,
     value: key =>
-      config.has(key) ? config.get(key) : throwRequireKeyError(key)
+      config.has(key) ? config.get(key) : throwRequireKeyError(key, env)
   })
 
   Object.defineProperty(config, 'required', {

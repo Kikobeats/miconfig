@@ -91,6 +91,17 @@ const config = loadConfig(environment)
 
 The configuration `default` will always be  loaded, being possible overwrite these defaults values by the current `NODE_ENV` configuration.
 
+In case you want to use a different source of truth rather than `NODE_ENV`, you can pass it as second argument:
+
+```js
+const loadConfig = require('miconfig')
+
+const config = loadConfig({
+  default: require('./config/default'),
+  production: require('./config/default')
+}, process.env.APP_ENV)
+```
+
 ### Accessing to configuration
 
 After **miconfig** loads your configuration, you can safely access to any value
