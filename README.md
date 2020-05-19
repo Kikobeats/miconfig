@@ -66,10 +66,10 @@ const fs = require('fs')
 const fromYaml = filepath => yaml.safeLoad(fs.readFileSync(filepath, 'utf8'))
 
 const config = loadConfig({
-  default: fromYaml('./config/default'),
-  production: fromYaml('./config/production'),
-  staging: fromYaml('./config/staging'),
-  test: fromYaml('./config/test')
+  default: fromYaml('./config/default.yml'),
+  production: fromYaml('./config/production.yml'),
+  staging: fromYaml('./config/staging.yml'),
+  test: fromYaml('./config/test.yml')
 })
 ```
 
