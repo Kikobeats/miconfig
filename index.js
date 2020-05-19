@@ -8,8 +8,8 @@ const { NODE_ENV } =
   typeof process === 'object'
     ? process.env
     : typeof Deno !== 'undefined'
-      ? Deno.env()
-      : {}
+    ? Deno.env()
+    : {}
 
 const RESERVED_KEYS = ['get', 'has', 'require', 'required']
 
@@ -34,15 +34,27 @@ module.exports = ({ default: base, ...envs }) => {
     )
   }
 
-  config.get = dlv.bind(dlv, config)
+  Object.defineProperty(config, 'get', {
+    enumerable: false,
+    value: dlv.bind(dlv, config)
+  })
 
-  config.has = key => key in config
+  Object.defineProperty(config, 'has', {
+    enumerable: false,
+    value: key => key in config
+  })
 
-  config.require = key =>
-    config.has(key) ? config.get(key) : throwRequireKeyError(key)
+  Object.defineProperty(config, 'require', {
+    enumerable: false,
+    value: key =>
+      config.has(key) ? config.get(key) : throwRequireKeyError(key)
+  })
 
-  config.required = new Proxy(config, {
-    get: (target, key) => config.require(key)
+  Object.defineProperty(config, 'required', {
+    enumerable: false,
+    value: new Proxy(config, {
+      get: (target, key) => config.require(key)
+    })
   })
 
   return config
