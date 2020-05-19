@@ -2,7 +2,7 @@
 
 const test = require('ava')
 
-const nanoConfig = require('..')
+const miconfig = require('..')
 
 const mock = props => ({
   default: {
@@ -13,8 +13,8 @@ const mock = props => ({
 })
 
 test('throw an error if a reserved key is used', t => {
-  nanoConfig.RESERVED_KEYS.forEach(key => {
-    const error = t.throws(() => nanoConfig(mock({ [key]: true })))
+  miconfig.RESERVED_KEYS.forEach(key => {
+    const error = t.throws(() => miconfig(mock({ [key]: true })))
     t.is(error.name, 'Error')
     t.is(
       error.message,
@@ -24,13 +24,13 @@ test('throw an error if a reserved key is used', t => {
 })
 
 test('access keys from config', t => {
-  const config = nanoConfig(mock())
+  const config = miconfig(mock())
   t.is(config.foo, 'bar')
   t.is(config.hello, undefined)
 })
 
 test('access required keys from config', t => {
-  const { required } = nanoConfig(mock())
+  const { required } = miconfig(mock())
   t.is(required.foo, 'bar')
   const error = t.throws(() => required.hello)
   t.is(error.name, 'TypeError')
@@ -38,21 +38,21 @@ test('access required keys from config', t => {
 })
 
 test('.get', t => {
-  const config = nanoConfig(mock())
+  const config = miconfig(mock())
   t.is(config.get('foo'), 'bar')
   t.is(config.get('hello'), undefined)
   t.is(config.get('hello', 'world'), 'world')
 })
 
 test('.has', t => {
-  const config = nanoConfig(mock())
+  const config = miconfig(mock())
   t.is(config.has('foo'), true)
   t.is(config.has('hello'), false)
   t.is(config.has('foo.bar'), false)
 })
 
 test('.require', t => {
-  const config = nanoConfig(mock())
+  const config = miconfig(mock())
   t.is(config.require('foo'), 'bar')
   const error = t.throws(() => config.require('hello'))
   t.is(error.name, 'TypeError')

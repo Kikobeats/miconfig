@@ -1,7 +1,7 @@
 {
-  "name": "nanoconfig",
+  "name": "miconfig",
   "description": "Configuration loader for Node.js, browsers & Deno.",
-  "homepage": "https://nicedoc.io/Kikobeats/nanoconfig",
+  "homepage": "https://nicedoc.io/Kikobeats/miconfig",
   "version": "0.0.0",
   "main": "index.js",
   "author": {
@@ -11,10 +11,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Kikobeats/nanoconfig.git"
+    "url": "git+https://github.com/Kikobeats/miconfig.git"
   },
   "bugs": {
-    "url": "https://github.com/Kikobeats/nanoconfig/issues"
+    "url": "https://github.com/Kikobeats/miconfig/issues"
   },
   "keywords": [
     "browser",

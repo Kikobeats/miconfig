@@ -8,8 +8,8 @@ const { NODE_ENV } =
   typeof process === 'object'
     ? process.env
     : typeof Deno !== 'undefined'
-    ? Deno.env()
-    : {}
+      ? Deno.env()
+      : {}
 
 const RESERVED_KEYS = ['get', 'has', 'require', 'required']
 
