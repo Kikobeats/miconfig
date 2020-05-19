@@ -104,7 +104,7 @@ const database = config.require('database')
 
 ```js
 // check if a value exists
-if (env.has('feature.prerender')) {
+if (config.has('feature.prerender')) {
   console.log('prerender is enabled')
 }
 ```
