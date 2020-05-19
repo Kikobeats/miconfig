@@ -77,18 +77,32 @@ The configuration `default` will always be  loaded, being possible overwrite the
 
 ### Accessing to configuration
 
-After **miconfig** loads your configuration, you can safely access to any value:
+After **miconfig** loads your configuration, you can safely access to any value
+
+#### Safe access
 
 ```js
 // read a value, don't care if it's empty
 const database = config.get('database')
+```
 
+#### Safe access + default value
+
+```js
 // read a value, use a default if empty
 const database = config.get('database', 'localhost')
+```
 
+#### Require access
+
+```js
 // read a value, throw an error if it doesn't exist
 const database = config.require('database')
+```
 
+#### Typecheck access
+
+```js
 // check if a value exists
 if (env.has('feature.prerender')) {
   console.log('prerender is enabled')
@@ -97,10 +111,15 @@ if (env.has('feature.prerender')) {
 
 Additionally, you can retrieve more than one value at one time with destructuring assignment:
 
+#### Destructuring safe access
+
 ```js
 // read multiple values, don't care if it's empty
 const { timezone, database } = config
+```
+#### Destructuring require access
 
+```js
 // read multiple values, throw an error if it doesn't exist
 const { timezone, database } = config.required
 ```
