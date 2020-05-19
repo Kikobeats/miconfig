@@ -49,7 +49,7 @@ Just call **miconfig** passing these configuratios:
 const loadConfig = require('miconfig')
 
 const FILES = [
-  'default', 
+  'default',
   NODE_ENV === 'development' ? undefined : NODE_ENV
 ].filter(Boolean)
 
@@ -74,7 +74,7 @@ const fs = require('fs')
 const fromYaml = filepath => yaml.safeLoad(fs.readFileSync(filepath, 'utf8'))
 
 const FILES = [
-  'default', 
+  'default',
   NODE_ENV === 'development' ? undefined : NODE_ENV
 ].filter(Boolean)
 
