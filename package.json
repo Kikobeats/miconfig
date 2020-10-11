@@ -2,7 +2,7 @@
   "name": "miconfig",
   "description": "Configuration loader for Node.js, browsers & Deno.",
   "homepage": "https://nicedoc.io/Kikobeats/miconfig",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "main": "index.js",
   "author": {
     "email": "josefrancisco.verdu@gmail.com",
