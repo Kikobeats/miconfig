@@ -43,7 +43,7 @@ You can load them for anywhere, e.g., from a folder called `config`:
    └── test.js
 ```
 
-Just call **miconfig** passing these configuratios:
+Just call **miconfig** passing these configuration:
 
 ```js
 const loadConfig = require('miconfig')
