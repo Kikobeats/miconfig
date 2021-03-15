@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/Kikobeats/miconfig/compare/v1.0.7...v1.1.0) (2021-03-15)
+
+
+### Features
+
+* auto parse values ([3919552](https://github.com/Kikobeats/miconfig/commit/3919552bcfbf1f1791a54f22d6bbc50044d6811a))
+
 ### [1.0.7](https://github.com/Kikobeats/miconfig/compare/v1.0.6...v1.0.7) (2020-10-11)
 
 ### [1.0.6](https://github.com/Kikobeats/miconfig/compare/v1.0.5...v1.0.6) (2020-10-11)
