@@ -2,6 +2,7 @@
 
 'use strict'
 
+const autoParse = require('auto-parse')
 const merge = require('merge-options')
 const dlv = require('dlv')
 
@@ -38,12 +39,12 @@ module.exports = ({ default: base, ...envs }, env = getSource()) => {
 
   Object.defineProperty(config, 'get', {
     enumerable: false,
-    value: dlv.bind(dlv, config)
+    value: (key, def) => autoParse(dlv(config, key, def))
   })
 
   Object.defineProperty(config, 'has', {
     enumerable: false,
-    value: key => key in config
+    value: key => !!config.get(key)
   })
 
   Object.defineProperty(config, 'require', {

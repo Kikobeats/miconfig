@@ -7,6 +7,8 @@ const miconfig = require('..')
 const mock = props => ({
   default: {
     ...process.env,
+    number: '123',
+    bool: 'true',
     foo: 'bar',
     ...props
   }
@@ -38,17 +40,23 @@ test('access required keys from config', t => {
 })
 
 test('.get', t => {
-  const config = miconfig(mock())
+  const store = mock({ fooz: { baar: { baaz: 'hello world' } } })
+  const config = miconfig(store)
+  t.is(config.get('number'), 123)
+  t.is(config.get('bool'), true)
   t.is(config.get('foo'), 'bar')
+  t.is(config.get('fooz.baar.baaz'), 'hello world')
   t.is(config.get('hello'), undefined)
   t.is(config.get('hello', 'world'), 'world')
 })
 
 test('.has', t => {
-  const config = miconfig(mock())
+  const store = mock({ fooz: { baar: { baaz: 'hello world' } } })
+  const config = miconfig(store)
   t.is(config.has('foo'), true)
   t.is(config.has('hello'), false)
   t.is(config.has('foo.bar'), false)
+  t.is(config.has('fooz.baar.baaz'), true)
 })
 
 test('.require', t => {
