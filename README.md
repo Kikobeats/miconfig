@@ -1,23 +1,20 @@
 <p align="center">
-  <img src="https://absurd.design/assets/img/chapter1/gallery-color-69-3.jpg" alt="miconfig">
+  <img src="/logo.jpeg" alt="miconfig">
 </p>
 
 ![Last version](https://img.shields.io/github/tag/Kikobeats/miconfig.svg?style=flat-square)
-[![Build Status](https://img.shields.io/travis/com/Kikobeats/miconfig/master.svg?style=flat-square)](https://travis-ci.com/Kikobeats/miconfig)
 [![Coverage Status](https://img.shields.io/coveralls/Kikobeats/miconfig.svg?style=flat-square)](https://coveralls.io/github/Kikobeats/miconfig)
-[![Dependency status](https://img.shields.io/david/Kikobeats/miconfig.svg?style=flat-square)](https://david-dm.org/Kikobeats/miconfig)
-[![Dev Dependencies Status](https://img.shields.io/david/dev/Kikobeats/miconfig.svg?style=flat-square)](https://david-dm.org/Kikobeats/miconfig#info=devDependencies)
 [![NPM Status](https://img.shields.io/npm/dm/miconfig.svg?style=flat-square)](https://www.npmjs.org/package/miconfig)
 
 **miconfig** — Configuration loader for Node.js, browsers & Deno.
 
 ## Features
 
-* **Easy**: Designed for situations where a PhD into load configurations is infeasible.
-* **Lightweight**: no bloat, less than 1KB with all dependencies.
-* **Isomorphic**: Compatible with Node.js, browsers & Deno.
-* **Flexible**: Super easy load any kind of configuration.
-* **Simple**: The whole module is ~50 lines of code.
+- **Easy**: Designed for situations where a PhD into load configurations is infeasible.
+- **Lightweight**: no bloat, less than 1KB with all dependencies.
+- **Isomorphic**: Compatible with Node.js, browsers & Deno.
+- **Flexible**: Super easy load any kind of configuration.
+- **Simple**: The whole module is ~50 lines of code.
 
 ## Install
 
@@ -89,17 +86,20 @@ const environment = FILES.reduce(
 const config = loadConfig(environment)
 ```
 
-The configuration `default` will always be  loaded, being possible overwrite these defaults values by the current `NODE_ENV` configuration.
+The configuration `default` will always be loaded, being possible overwrite these defaults values by the current `NODE_ENV` configuration.
 
 In case you want to use a different source of truth rather than `NODE_ENV`, you can pass it as second argument:
 
 ```js
 const loadConfig = require('miconfig')
 
-const config = loadConfig({
-  default: require('./config/default'),
-  production: require('./config/default')
-}, process.env.APP_ENV)
+const config = loadConfig(
+  {
+    default: require('./config/default'),
+    production: require('./config/default')
+  },
+  process.env.APP_ENV
+)
 ```
 
 ### Accessing to configuration
@@ -144,6 +144,7 @@ Additionally, you can retrieve more than one value at one time with destructurin
 // read multiple values, don't care if it's empty
 const { timezone, database } = config
 ```
+
 #### Destructuring require access
 
 ```js
@@ -153,7 +154,7 @@ const { timezone, database } = config.required
 
 ## License
 
-**miconfig** © [Kiko Beats](https://kikobeats.com), released under the [MIT](https://github.com/Kikobeats/miconfig/blob/master/LICENSE.md) License. Logo by [Absurd Design](https://absurd.design).<br>
+**miconfig** © [Kiko Beats](https://kikobeats.com), released under the [MIT](https://github.com/Kikobeats/miconfig/blob/master/LICENSE.md) License. Logo by [Absurd Design](https://absurd.design/freelicenset).<br>
 
 Authored and maintained by [Kiko Beats](https://kikobeats.com) with help from [contributors](https://github.com/Kikobeats/miconfig/contributors).
 
