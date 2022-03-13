@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.1.1 (2022-03-13)
+
 ## [1.1.0](https://github.com/Kikobeats/miconfig/compare/v1.0.7...v1.1.0) (2021-03-15)
 
 
