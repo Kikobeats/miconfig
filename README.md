@@ -50,13 +50,10 @@ const FILES = [
   NODE_ENV === 'development' ? undefined : NODE_ENV
 ].filter(Boolean)
 
-const environment = FILES.reduce(
-  (acc, key) => ({
-    ...acc,
-    [key]: require(`./config/${key}`)
-  }),
-  {}
-)
+const environment = FILES.reduce((acc, key) => {
+  acc[key] = require(`./config/${key}`)
+  return acc
+}, {})
 
 const config = loadConfig(environment)
 ```
