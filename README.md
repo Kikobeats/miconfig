@@ -24,11 +24,11 @@ $ npm install miconfig --save
 
 ## Usage
 
+In **miconfig**, a configuration is identified by environment name.
+
 ### Load Configuration Files
 
-In **miconfig**, a configuration has a `NODE_ENV` value associated.
-
-You can load them for anywhere, e.g., from a folder called `config`:
+Place the configuration files wherever you desire, e.g., in a folder called `config`:
 
 ```bash
 .
@@ -40,7 +40,7 @@ You can load them for anywhere, e.g., from a folder called `config`:
    └── test.js
 ```
 
-Just call **miconfig** passing these configuration:
+Then, load them using **miconfig**:
 
 ```js
 const loadConfig = require('miconfig')
@@ -61,31 +61,17 @@ const config = loadConfig(environment)
 In case you want to use a different file format (like YAML), you've to parser them before be loaded:
 
 ```js
-const loadConfig = require('miconfig')
-const yaml = require('js-yaml')
-const fs = require('fs')
-
-const fromYaml = filepath => yaml.safeLoad(fs.readFileSync(filepath, 'utf8'))
-
-const FILES = [
-  'default',
-  NODE_ENV === 'development' ? undefined : NODE_ENV
-].filter(Boolean)
-
-const environment = FILES.reduce(
-  (acc, key) => ({
-    ...acc,
-    [key]: fromYaml(`./config/${key}.yml`)
-  }),
-  {}
-)
-
-const config = loadConfig(environment)
+const environment = FILES.reduce((acc, key) => {
+  acc[key] = fromYaml(`./config/${key}.yml`)
+  return acc
+}, {})
 ```
 
-The configuration `default` will always be loaded, being possible overwrite these defaults values by the current `NODE_ENV` configuration.
+The `default` configuration is always loaded and merged with the target configuration environment.
 
-In case you want to use a different source of truth rather than `NODE_ENV`, you can pass it as second argument:
+**miconfig** uses `process.env.NODE_ENV` to determine what configuration should be loaded.
+
+In case you want to use a different source of truth, you can pass it as second argument:
 
 ```js
 const loadConfig = require('miconfig')
@@ -101,27 +87,27 @@ const config = loadConfig(
 
 ### Accessing to configuration
 
-After **miconfig** loads your configuration, you can safely access to any value
+After **miconfig** loads your configuration, you can safely access to any value.
 
 #### Safe access
 
 ```js
 // read a value, don't care if it's empty
-const database = config.get('database')
+const database = config.get('database.url')
 ```
 
 #### Safe access + default value
 
 ```js
 // read a value, use a default if empty
-const database = config.get('database', 'localhost')
+const database = config.get('database.url', 'localhost')
 ```
 
 #### Require access
 
 ```js
 // read a value, throw an error if it doesn't exist
-const database = config.require('database')
+const database = config.require('database.url')
 ```
 
 #### Typecheck access
@@ -145,7 +131,7 @@ const { timezone, database } = config
 #### Destructuring require access
 
 ```js
-// read multiple values, throw an error if it doesn't exist
+// read multiple values, throw an error if one of them doesn't exist
 const { timezone, database } = config.required
 ```
 
