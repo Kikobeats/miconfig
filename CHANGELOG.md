@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.1.5 (2023-09-05)
+
+
+### Bug Fixes
+
+* linter ([4269b7b](https://github.com/Kikobeats/miconfig/commit/4269b7bd2a8492011eb2e5368dfaeff780c4177c))
+
 ### 1.1.4 (2022-05-17)
 
 ### 1.1.3 (2022-04-12)
