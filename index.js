@@ -10,8 +10,8 @@ const getSource = () =>
   (typeof process === 'object'
     ? process.env
     : typeof Deno !== 'undefined'
-    ? Deno.env()
-    : {}
+      ? Deno.env()
+      : {}
   ).NODE_ENV
 
 const RESERVED_KEYS = ['get', 'has', 'require', 'required']
